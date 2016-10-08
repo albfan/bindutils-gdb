@@ -25,9 +25,26 @@ void bt_sighandler(int sig, struct sigcontext ctx) {
   {
     printf("[bt] #%d %s\n", i, messages[i]);
 
-    char syscom[256];
-    sprintf(syscom,"addr2line %p -e sighandler", trace[i]); //last parameter is the name of this app
-    system(syscom);
+    if (trace[i]) {
+        char syscom[256];
+        sprintf(syscom,"addr2line %p -e sighandler", trace[i]); //last parameter is the name of this app
+        FILE *fp;
+        char path[1024];
+
+        fp = popen(syscom, "r");
+        if (fp == NULL) {
+            printf("-- no source could be retrieved --\n");
+            continue;
+        }
+
+        while (fgets(path, sizeof(path)-1, fp) != NULL) {
+            printf("%s", path);
+        }
+
+        pclose(fp);
+    } else {
+        printf("-- no source avaliable --\n");
+    }
   }
 
   exit(0);
