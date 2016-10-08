@@ -1,0 +1,10 @@
+language: generic
+
+sudo: false
+
+   - cd test
+   - ./test_backtrace.sh 
+
+notifications:
+  email:
+    -  albertofanjul@gmail.com
