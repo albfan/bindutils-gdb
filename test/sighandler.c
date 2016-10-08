@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <signal.h>
 #include <execinfo.h>
+#include <stdlib.h>
 
 void bt_sighandler(int sig, struct sigcontext ctx) {
 
@@ -10,13 +11,13 @@ void bt_sighandler(int sig, struct sigcontext ctx) {
 
   if (sig == SIGSEGV)
     printf("Got signal %d, faulty address is %p, "
-           "from %p\n", sig, ctx.cr2, ctx.eip);
+           "from %p\n", sig, ctx.cr2, ctx.rip);
   else
     printf("Got signal %d\n", sig);
 
   trace_size = backtrace(trace, 16);
   /* overwrite sigaction with caller's address */
-  trace[1] = (void *)ctx.eip;
+  trace[1] = (void *)ctx.rip;
   messages = backtrace_symbols(trace, trace_size);
   /* skip first stack frame (points here) */
   printf("[bt] Execution path:\n");
