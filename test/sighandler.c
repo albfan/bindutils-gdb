@@ -27,7 +27,7 @@ void bt_sighandler(int sig, struct sigcontext ctx) {
 
     if (trace[i]) {
         char syscom[256];
-        sprintf(syscom,"addr2line %p -e sighandler", trace[i]); //last parameter is the name of this app
+        sprintf(syscom,"addr2line %p -s -e sighandler", trace[i]); //last parameter is the name of this app
         FILE *fp;
         char path[1024];
 
