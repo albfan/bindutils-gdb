@@ -3,6 +3,7 @@ language: generic
 sudo: false
 
    - cd test
+   - make CFLAGS=-g
    - ./test_backtrace.sh 
 
 notifications:

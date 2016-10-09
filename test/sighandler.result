@@ -2,12 +2,12 @@ Got signal 11, faulty address is 0x10202, from (nil)
 [bt] Execution path:
 [bt] #1 [(nil)]
 -- no source avaliable --
-[bt] #2 ./sighandler(func_a+0x20) [0x400bfa]
-../sighandler.c:59
-[bt] #3 ./sighandler(func_b+0x1e) [0x400c22]
-../sighandler.c:69
-[bt] #4 ./sighandler(main+0x6c) [0x400c99]
-../sighandler.c:89
+[bt] #2 ./sighandler() [0x4009ba]
+sighandler.c:59
+[bt] #3 ./sighandler() [0x4009e2]
+sighandler.c:69
+[bt] #4 ./sighandler() [0x400a59]
+sighandler.c:89
 ??:0
-[bt] #6 ./sighandler(_start+0x2a) [0x40095a]
+[bt] #6 ./sighandler() [0x40071a]
 ??:?
